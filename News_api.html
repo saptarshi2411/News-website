@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  <title>News site</title>
+</head>
+<style>
+  body {
+    padding: 8px;
+  }
+
+  .hoverr:hover {
+    transform: scale(1.2);
+    z-index: 1;
+  }
+
+  .main {
+    background-color:rgb(215, 190, 190);
+  }
+
+
+
+  .mainbox {
+
+    height: 400px;
+    /* Set a fixed height for all boxes */
+    overflow: hidden;
+    /* Hide overflow content */
+  }
+
+  .card {
+    height: 100%;
+    /* Make the card div take 100% height of its parent */
+    display: flex;
+    flex-direction: column;
+  }
+
+
+  #bu {
+    position: absolute;
+    bottom: 10px;
+    left: 18px;
+  }
+
+  .card-img-top {
+    max-height: 200px;
+
+    object-fit: cover;
+    /* Ensures the image covers the entire space */
+  }
+
+  #second {
+    background-color: grey;
+  }
+  .card-title{
+    color:black;
+  }
+  .card{
+    background-color:white;
+    padding: 4px;
+  }
+</style>
+
+<body>
+  <div id="second" class="container-fluid p-4 text-center">
+    <div class="row justify-content-center">
+      <div class="col-6 mx-auto">
+        <button id="nat" type="button" class="btn btn-danger mx-1 my-2">National</button>
+        <button id="spo" type="button" class="btn btn-danger mx-1 my-">Sports</button>
+        <button id="busi" type="button" class="btn btn-danger mx-1 my-2">Business</button>
+        <button id="gen" type="button" class="btn btn-danger mx-1 my-2">General</button>
+
+        <br>
+
+        <button id="tech" type="button" class="btn btn-danger mx-1 my-2">Technology</button>
+        <button id="head" type="button" class="btn btn-danger mx-1 my-2">HeadLines</button>
+        <button id="wea" type="button" class="btn btn-danger mx-1 my-2">Weather Report</button>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="container-fluid main">
+    <div id="add" class=" p-4 row justify-content-center">
+    </div>
+  </div>
+
+  <footer class="row mx-2 p-3 lastone pt-4">
+    <div class="col-12 col-md">
+      <img class="mb-2" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="24"
+        height="24">
+      <small class="d-block mb-3 last text">© 2017-2018</small>
+    </div>
+    <div class="col-6 col-md">
+      <h5 class="last">Features</h5>
+      <ul class="list-unstyled last text-small">
+        <li><a class="text last" href="#">Cool stuff</a></li>
+        <li><a class="text last" href="#">Random feature</a></li>
+        <li><a class="text last" href="#">Team feature</a></li>
+        <li><a class="text last" href="#">Stuff for developers</a></li>
+        <li><a class="text last" href="#">Another one</a></li>
+        <li><a class="text last" href="#">Last time</a></li>
+      </ul>
+    </div>
+    <div class="col-6 col-md">
+      <h5>Resources</h5>
+      <ul class="list-unstyled last text-small">
+        <li><a class="text last" href="#">Resource</a></li>
+        <li><a class="text last" href="#">Resource name</a></li>
+        <li><a class="text last" href="#">Another resource</a></li>
+        <li><a class="text last" href="#">Final resource</a></li>
+      </ul>
+    </div>
+    <div class="col-6 col-md">
+      <h5>About</h5>
+      <ul class="list-unstyled last text-small">
+        <li><a class="text last" href="#">Team</a></li>
+        <li><a class="text last" href="#">Locations</a></li>
+        <li><a class="text last" href="#">Privacy</a></li>
+        <li><a class="text last" href="#">Terms</a></li>
+      </ul>
+    </div>
+  </footer>
+
+
+
+
+
+
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+  <script>
+     
+
+     const apiKey = '499d03534f224e8890dcd1f95376001c';
+     const q = document.querySelector("#add");
+const apiUrlBase = 'https://newsapi.org/v2/everything?q=';
+const defaultCategory = 'all';
+
+
+
+const sportsButton = document.getElementById('spo');
+sportsButton.addEventListener('click', function(e) {
+  e.preventDefault();
+  q.innerHTML="";
+  const apiUrl = apiUrlBase + 'sports';
+  fetchNews(apiUrl);
+});
+document.querySelector("#tech").addEventListener('click', function(e) {
+  e.preventDefault();
+  q.innerHTML="";
+  const apiUrl = apiUrlBase + 'technology';
+  fetchNews(apiUrl);
+});
+
+document.querySelector("#busi").addEventListener('click', function(e) {
+  e.preventDefault();
+  q.innerHTML="";
+  const apiUrl = apiUrlBase + 'business';
+  fetchNews(apiUrl);
+});
+document.querySelector("#gen").addEventListener('click', function(e) {
+  e.preventDefault();
+  q.innerHTML="";
+  const apiUrl = apiUrlBase + 'general';
+  fetchNews(apiUrl);
+});
+document.querySelector("#wea").addEventListener('click', function(e) {
+  e.preventDefault();
+  q.innerHTML="";
+  const apiUrl = apiUrlBase + 'weather';
+  fetchNews(apiUrl);
+});
+document.querySelector("#nat").addEventListener('click', function(e) {
+  e.preventDefault();
+  q.innerHTML="";
+  const apiUrl = apiUrlBase + 'farmer+India';
+  fetchNews(apiUrl);
+});
+document.querySelector("#head").addEventListener('click', function(e) {
+  e.preventDefault();
+  q.innerHTML="";
+  const apiUrl = apiUrlBase + 'headlines';
+  fetchNews(apiUrl);
+});
+
+
+function fetchNews(apiUrl) {
+  fetch(apiUrl + '&apiKey=' + apiKey)
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      console.log(data);
+      shownews(data.articles);
+    })
+    .catch((e) => {
+      console.error(e);
+    });
+}
+
+      function shownews(data) {
+        
+
+      data.forEach((art) => {
+
+        const box = document.createElement("div")
+        box.classList.add("mainbox", "hoverr", "col-md-3", "my-4", "mx-4");
+
+        box.innerHTML = `<div class="card">
+        <img id="img1" class="card-img-top" src="${art.urlToImage}" alt="Card image cap">
+        <div class="card-body">
+          <h6 id="tit" class="card-title">${art.title}</h5>
+          <h7 class="card-title">${art.author}</h3>
+            <br/>
+          <h8 class="card-title">${art.publishedAt}</h6>
+         
+            <a href="${art.url}" id="bu" class="btn buu btn-primary target="_blank">View</a>
+
+        </div>
+      </div>`
+        q.appendChild(box);
+      })
+     
+    }
+
+
+const defaultApiUrl = apiUrlBase + defaultCategory;
+fetchNews(defaultApiUrl);
+
+</script>
+</body>
+</html>
+
+
+
+<script>
+  <!--
+      // This attribute opens the link in a new browser window or tab. When the user clicks the "View" button, the linked article will open in a new tab.
+      // The _blank value for the target attribute is used to specify that the link should open in a new browsing context.
+      // So, when someone clicks the "View" button, it opens the corresponding news 
+      // article in a new browser tab due to the combination of href 
+      // pointing to the article's URL and target="_blank" specifying that the link should open in a new tab.
+  
+      // Custom JavaScript for opening links in new tabs
+      // const p = document.querySelectorAll('.bu');
+      // p.forEach(function (m) {
+      //     m.addEventListener("click", function (e) {
+      //         window.location.assign("food3.html", "_blank");
+      //     });
+      // });
+  -->
+  </script>
+  
+
+
+
+
+
+
+
+
+
+
